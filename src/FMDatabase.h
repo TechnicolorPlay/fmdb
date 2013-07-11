@@ -342,7 +342,7 @@
  
  @param sql The SELECT statement to be performed, with optional `?` placeholders.
 
- @param ... Optional parameters to bind to `?` placeholders in the SQL statement.
+ @discussion ...'s are optional parameters to bind to `?` placeholders in the SQL statement.
 
  @return A `<FMResultSet>` for the result set upon success; `nil` upon failure. If failed, you can call `<lastError>`, `<lastErrorCode>`, or `<lastErrorMessage>` for diagnostic information regarding the failure.
  
@@ -360,7 +360,7 @@
  
  @param format The SQL to be performed, with `printf`-style escape sequences.
 
- @param ... Optional parameters to bind to use in conjunction with the `printf`-style escape sequences in the SQL statement.
+ @discussion ...'s are optional parameters to bind to use in conjunction with the `printf`-style escape sequences in the SQL statement.
 
  @return A `<FMResultSet>` for the result set upon success; `nil` upon failure. If failed, you can call `<lastError>`, `<lastErrorCode>`, or `<lastErrorMessage>` for diagnostic information regarding the failure.
 
