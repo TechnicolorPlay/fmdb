@@ -18,6 +18,11 @@
  */
  
 @implementation FMDatabaseQueue
+{
+    NSString            *_path;
+    dispatch_queue_t    _queue;
+    FMDatabase          *_db;
+}
 
 @synthesize path = _path;
 
@@ -70,9 +75,9 @@
 - (void)close {
     FMDBRetain(self);
     dispatch_sync(_queue, ^() { 
-        [_db close];
+        [self->_db close];
         FMDBRelease(_db);
-        _db = 0x00;
+        self->_db = 0x00;
     });
     FMDBRelease(self);
 }

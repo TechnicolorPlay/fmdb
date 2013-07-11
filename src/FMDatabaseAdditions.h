@@ -24,7 +24,7 @@
 /** Return `int` value for query
  
  @param query The SQL query to be performed. 
- @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
+ @discussion ...'s are a list of parameters that will be bound to the `?` placeholders in the SQL query.
 
  @return `int` value.
  */
@@ -34,7 +34,7 @@
 /** Return `long` value for query
 
  @param query The SQL query to be performed.
- @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
+ @discussion ...'s are a list of parameters that will be bound to the `?` placeholders in the SQL query.
 
  @return `long` value.
  */
@@ -44,7 +44,7 @@
 /** Return `BOOL` value for query
 
  @param query The SQL query to be performed.
- @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
+ @discussion ...'s are a list of parameters that will be bound to the `?` placeholders in the SQL query.
 
  @return `BOOL` value.
  */
@@ -54,7 +54,7 @@
 /** Return `double` value for query
 
  @param query The SQL query to be performed.
- @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
+ @discussion ...'s are a list of parameters that will be bound to the `?` placeholders in the SQL query.
 
  @return `double` value.
  */
@@ -64,7 +64,7 @@
 /** Return `NSString` value for query
 
  @param query The SQL query to be performed.
- @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
+ @discussion ...'s are a list of parameters that will be bound to the `?` placeholders in the SQL query.
 
  @return `NSString` value.
  */
@@ -74,7 +74,7 @@
 /** Return `NSData` value for query
 
  @param query The SQL query to be performed.
- @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
+ @discussion ...'s are a list of parameters that will be bound to the `?` placeholders in the SQL query.
 
  @return `NSData` value.
  */
@@ -84,7 +84,7 @@
 /** Return `NSDate` value for query
 
  @param query The SQL query to be performed.
- @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
+ @discussion ...'s are a list of parameters that will be bound to the `?` placeholders in the SQL query.
 
  @return `NSDate` value.
  */

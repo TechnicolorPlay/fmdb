@@ -23,13 +23,7 @@
  - `<FMDatabase>`
  */
 
-@interface FMResultSet : NSObject {
-    FMDatabase          *_parentDB;
-    FMStatement         *_statement;
-    
-    NSString            *_query;
-    NSMutableDictionary *_columnNameToIndexMap;
-}
+@interface FMResultSet : NSObject
 
 ///-----------------
 /// @name Properties
@@ -41,7 +35,7 @@
 
 /** `NSMutableDictionary` mapping column names to numeric index */
 
-@property (readonly) NSMutableDictionary *columnNameToIndexMap;
+@property (atomic, readonly) NSMutableDictionary *columnNameToIndexMap;
 
 /** `FMStatement` used by result set. */
 

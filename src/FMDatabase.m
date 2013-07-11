@@ -9,6 +9,27 @@
 @end
 
 @implementation FMDatabase
+{
+    
+    sqlite3*            _db;
+    NSString*           _databasePath;
+    BOOL                _logsErrors;
+    BOOL                _crashOnErrors;
+    BOOL                _traceExecution;
+    BOOL                _checkedOut;
+    BOOL                _shouldCacheStatements;
+    BOOL                _isExecutingStatement;
+    BOOL                _inTransaction;
+    int                 _busyRetryTimeout;
+    
+    NSMutableDictionary *_cachedStatements;
+    NSMutableSet        *_openResultSets;
+    NSMutableSet        *_openFunctions;
+    
+    NSDateFormatter     *_dateFormat;
+}
+
+@synthesize db = _db;
 @synthesize cachedStatements=_cachedStatements;
 @synthesize logsErrors=_logsErrors;
 @synthesize crashOnErrors=_crashOnErrors;
@@ -752,7 +773,7 @@
     return [self executeQuery:sql withArgumentsInArray:arguments orDictionary:nil orVAList:nil];
 }
 
-- (BOOL)executeUpdate:(NSString*)sql error:(NSError**)outErr withArgumentsInArray:(NSArray*)arrayArgs orDictionary:(NSDictionary *)dictionaryArgs orVAList:(va_list)args {
+- (BOOL)executeUpdate:(NSString*)sql error:(NSError* __autoreleasing *)outErr withArgumentsInArray:(NSArray*)arrayArgs orDictionary:(NSDictionary *)dictionaryArgs orVAList:(va_list)args {
     
     if (![self databaseExists]) {
         return NO;
@@ -1009,7 +1030,7 @@
     return [self executeUpdate:sql withArgumentsInArray:arguments];
 }
 
-- (BOOL)update:(NSString*)sql withErrorAndBindings:(NSError**)outErr, ... {
+- (BOOL)update:(NSString*)sql withErrorAndBindings:(NSError*  __autoreleasing *)outErr, ... {
     va_list args;
     va_start(args, outErr);
     
@@ -1065,7 +1086,7 @@
 
 #if SQLITE_VERSION_NUMBER >= 3007000
 
-- (BOOL)startSavePointWithName:(NSString*)name error:(NSError**)outErr {
+- (BOOL)startSavePointWithName:(NSString*)name error:(NSError*  __autoreleasing *)outErr {
     
     // FIXME: make sure the savepoint name doesn't have a ' in it.
     
@@ -1083,7 +1104,7 @@
     return YES;
 }
 
-- (BOOL)releaseSavePointWithName:(NSString*)name error:(NSError**)outErr {
+- (BOOL)releaseSavePointWithName:(NSString*)name error:(NSError*  __autoreleasing *)outErr {
     
     NSParameterAssert(name);
     
@@ -1096,7 +1117,7 @@
     return worked;
 }
 
-- (BOOL)rollbackToSavePointWithName:(NSString*)name error:(NSError**)outErr {
+- (BOOL)rollbackToSavePointWithName:(NSString*)name error:(NSError*  __autoreleasing *)outErr {
     
     NSParameterAssert(name);
     
@@ -1188,6 +1209,12 @@ void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3
 
 
 @implementation FMStatement
+{
+    sqlite3_stmt *_statement;
+    NSString *_query;
+    long _useCount;
+}
+
 @synthesize statement=_statement;
 @synthesize query=_query;
 @synthesize useCount=_useCount;

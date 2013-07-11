@@ -74,29 +74,16 @@
 
  */
 
-@interface FMDatabase : NSObject  {
-    
-    sqlite3*            _db;
-    NSString*           _databasePath;
-    BOOL                _logsErrors;
-    BOOL                _crashOnErrors;
-    BOOL                _traceExecution;
-    BOOL                _checkedOut;
-    BOOL                _shouldCacheStatements;
-    BOOL                _isExecutingStatement;
-    BOOL                _inTransaction;
-    int                 _busyRetryTimeout;
-    
-    NSMutableDictionary *_cachedStatements;
-    NSMutableSet        *_openResultSets;
-    NSMutableSet        *_openFunctions;
+@interface FMDatabase : NSObject  
 
-    NSDateFormatter     *_dateFormat;
-}
+
 
 ///-----------------
 /// @name Properties
 ///-----------------
+
+/** The sqlite3 database */
+@property (atomic, assign) sqlite3* db;
 
 /** Whether should trace execution */
 
@@ -261,7 +248,7 @@
  
  @param outErr A reference to the `NSError` pointer to be updated with an auto released `NSError` object if an error if an error occurs. If `nil`, no `NSError` object will be returned.
  
- @param ... Optional parameters to bind to `?` placeholders in the SQL statement.
+ @discussion ...'s are optional parameters to bind to `?` placeholders in the SQL statement.
  
  @return `YES` upon success; `NO` upon failure. If failed, you can call `<lastError>`, `<lastErrorCode>`, or `<lastErrorMessage>` for diagnostic information regarding the failure.
  */
@@ -272,7 +259,7 @@
 
  @param sql The SQL to be performed, with optional `?` placeholders.
 
- @param ... Optional parameters to bind to `?` placeholders in the SQL statement.
+ @discussion ...'s are optional parameters to bind to `?` placeholders in the SQL statement.
 
  @return `YES` upon success; `NO` upon failure. If failed, you can call `<lastError>`, `<lastErrorCode>`, or `<lastErrorMessage>` for diagnostic information regarding the failure.
  */
@@ -285,7 +272,7 @@
  
  @param format The SQL to be performed, with `printf`-style escape sequences.
 
- @param ... Optional parameters to bind to use in conjunction with the `printf`-style escape sequences in the SQL statement.
+ @discussion ...'s are optional parameters to bind to use in conjunction with the `printf`-style escape sequences in the SQL statement.
 
  @return `YES` upon success; `NO` upon failure. If failed, you can call `<lastError>`, `<lastErrorCode>`, or `<lastErrorMessage>` for diagnostic information regarding the failure.
 
@@ -896,12 +883,7 @@
  - [`sqlite3_stmt`](http://www.sqlite.org/c3ref/stmt.html)
  */
 
-@interface FMStatement : NSObject {
-    sqlite3_stmt *_statement;
-    NSString *_query;
-    long _useCount;
-}
-
+@interface FMStatement : NSObject 
 ///-----------------
 /// @name Properties
 ///-----------------

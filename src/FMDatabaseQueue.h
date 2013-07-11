@@ -61,11 +61,7 @@
 
  */
 
-@interface FMDatabaseQueue : NSObject {
-    NSString            *_path;
-    dispatch_queue_t    _queue;
-    FMDatabase          *_db;
-}
+@interface FMDatabaseQueue : NSObject 
 
 @property (atomic, retain) NSString *path;
 

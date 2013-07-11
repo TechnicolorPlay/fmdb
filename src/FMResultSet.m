@@ -8,6 +8,14 @@
 
 
 @implementation FMResultSet
+{
+    FMDatabase          *_parentDB;
+    FMStatement         *_statement;
+    
+    NSString            *_query;
+    NSMutableDictionary *_columnNameToIndexMap;
+}
+
 @synthesize query=_query;
 @synthesize statement=_statement;
 
